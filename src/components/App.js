@@ -13,10 +13,10 @@ function App() {
   const MOVIE_API_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=man`;
 
   useEffect(() => {
-    setLoading(false);
     fetch(MOVIE_API_URL)
       .then(response => response.json())
       .then(jsonResponse => {
+        setLoading(false);
         console.log(jsonResponse);
         if(localStorage.getItem("document"))
         setMovies(JSON.parse(localStorage.getItem("document")).results);

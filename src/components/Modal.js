@@ -4,7 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Image from "./image-unavailable-icon-260nw-1157415967.webp"
+import Image from "./image-unavailable-icon-260nw-1157415967.webp";
+import loadstyle from "../loader.module.css";
 
 const Moodal = (props) =>{
   // const [imdburl, setimdbUrl] = useState("#");
@@ -32,11 +33,16 @@ const Moodal = (props) =>{
       <Modal.Header closeButton className="bg-dark" style={{color:"white"}}>
         <Modal.Title id="contained-modal-title-vcenter">
           {props.movie.original_title}
-          {props.movie.release_date===null?null:(<p>Release Date : {props.movie.release_date}</p>)}
+          {props.movie.release_date==="" || props.movie.release_date===null ? null:(
+          <p>Release Date : {props.movie.release_date}</p>
+          )}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-dark">
       <Container>
+        {props.loading ? (
+          <div className={loadstyle.loader}></div>
+        ) : (
           <Row className="show-grid">
             <Col>
               <img src={poster} style={{width:"13rem"}}></img>
@@ -53,11 +59,14 @@ const Moodal = (props) =>{
               </p>
             </Col>
           </Row>
+        ) }
         </Container>
       </Modal.Body>
       <Modal.Footer className="bg-dark">
-        {props.things.imdburl===null?null:(<Button href={props.things.imdburl}>Go to IMDB Page</Button>)}
-        {/* <Button href={props.things.imdburl}>Go to IMDB Page</Button> */}
+        {props.loading ? (null) : props.things.imdburl===null ? null : (
+        <Button href={props.things.imdburl}>Go to IMDB Page</Button>
+        )}}
+        
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>

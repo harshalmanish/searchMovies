@@ -27,6 +27,7 @@ const CardItem = (props) =>{
 			things={props.things}
 			show={showModal}
 			onHide={() => setshowModal(false)}
+			loading={props.loading}
 		></Modal>
 		</>
     );
