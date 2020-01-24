@@ -8,20 +8,8 @@ import Image from "./image-unavailable-icon-260nw-1157415967.webp";
 import loadstyle from "../loader.module.css";
 
 const Moodal = (props) =>{
-  // const [imdburl, setimdbUrl] = useState("#");
-  // const [genres, setGenres] = useState([]);
+  
   const poster = props.movie.poster_path==null ? Image : `https://image.tmdb.org/t/p/w185${props.movie.poster_path}`;
-  // const MOVIE_URL = `https://api.themoviedb.org/3/movie/${props.movie.id}?api_key=21ae4e075ad23b2fddaf0870594cb704`;
-
-  // useEffect(() => {
-  //   fetch(MOVIE_URL)
-  //     .then(response => response.json())
-  //     .then(jsonResponse => {
-  //       console.log(jsonResponse);
-  //       setGenres(jsonResponse.genres);
-  //       setimdbUrl(`https://www.imdb.com/title/${jsonResponse.imdb_id}`);
-  //     })
-  // }, []);
 
     return(
         <Modal
@@ -44,10 +32,10 @@ const Moodal = (props) =>{
           <div className={loadstyle.loader}></div>
         ) : (
           <Row className="show-grid">
-            <Col>
-              <img src={poster} style={{width:"13rem"}}></img>
+            <Col xs={12} sm={12} md={6} lg={4}>
+              <img src={poster} style={{display:"block", margin:"1rem auto"}}></img>
             </Col>
-            <Col xs={8}>
+            <Col xs={12} sm={12} md={6} lg={8}>
               <p style={{color:"white"}}>{props.movie.overview}</p>
               <p style={{color:"white"}}> {props.things.genres.length>0? "Genres : " : null }
                 {props.things.genres.map((item,index)=>{
@@ -65,7 +53,7 @@ const Moodal = (props) =>{
       <Modal.Footer className="bg-dark">
         {props.loading ? (null) : props.things.imdburl===null ? null : (
         <Button href={props.things.imdburl}>Go to IMDB Page</Button>
-        )}}
+        )}
         
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>

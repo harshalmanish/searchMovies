@@ -3,6 +3,7 @@ import Input from "./Input";
 import Card from "./Card";
 import loadstyle from "../loader.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Row,Container } from "react-bootstrap";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -60,15 +61,17 @@ function App() {
     <>
     <Input search = {search}/>
     {loading && !errorMessage ? (
-    <div className={loadstyle.loader}></div>
+    <div className={loadstyle.loader} style={{border:"16px solid #f8f8f8", borderTop:"16px solid #000000"}}></div>
          ) : errorMessage ? (
-          <div className="errorMessage" style={{color:"white", textAlign:"center", marginTop:"10rem"}}>
+          <div className="errorMessage" style={{color:"white", textAlign:"center", margin:"5rem auto"}}>
             <h1>Error : {errorMessage} :(</h1>
             </div>
         ) : (
-          <div className="row" style={{color: "black"}}>
-            <Card movies={movies}/>
-          </div>
+          <Container>
+            <Row style={{color:"black"}}>
+              <Card movies={movies}/>
+            </Row>
+          </Container>
         )}
     </>
   );

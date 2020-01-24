@@ -1,21 +1,10 @@
 import React,{useState, useEffect} from "react";
 import CardItem from "./CardItem";
+import { Col } from "react-bootstrap";
 
 const Card = ({movies}) => {
     const [things, setThings] = useState({imdburl:"", genres:[]});
     const [loading, setLoading] = useState(true);
-
-    // useEffect(()=>{
-    //     fetch(`https://api.themoviedb.org/3/movie/50839?api_key=21ae4e075ad23b2fddaf0870594cb704`)
-    //     .then(response => response.json())
-    //     .then(jsonResponse => {
-    //         console.log(jsonResponse);
-    //         if(jsonResponse.imdb_id===null)
-    //         setThings({imdburl:null, genres:jsonResponse.genres})
-    //         else
-    //         setThings({imdburl:`https://www.imdb.com/title/${jsonResponse.imdb_id}`, genres:jsonResponse.genres});
-    // })
-    // },[])
     
     const Fetchmoviedata = movie =>{
         setLoading(true);
@@ -33,7 +22,6 @@ const Card = ({movies}) => {
                 setThings({imdburl:`https://www.imdb.com/title/${jsonResponse.imdb_id}`, genres:jsonResponse.genres});
             })
             .catch(error => {
-                // setLoading(false);
                 setThings({imdburl:null, genres:[]})
             })        
 
@@ -41,10 +29,12 @@ const Card = ({movies}) => {
     
     return movies.map((movie) => {
         return(
+            <Col xs={12} sm={12} md={6} lg={4} xl={3}>
             <CardItem Fetchmoviedata={Fetchmoviedata}
                       movie={movie}
                       things={things}
                       loading={loading}/>
+            </Col>
         );
     })
 }
