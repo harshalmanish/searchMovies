@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Form, FormControl, Button} from "react-bootstrap";
 
 const Input = (props) => {
     const [searchValue, setSearchValue] = useState("");
@@ -19,18 +20,10 @@ const Input = (props) => {
     return(
         <div id="searchDiv" className="bg-dark">
             <h1 style={{textAlign:"center", marginBottom:"20px"}}>Search for any movie</h1>
-            <div className="input-group mb-3">
-                  {/* <from> */}
-                  <input value={searchValue} 
-                    type="text" 
-                    className="form-control"
-                    placeholder="Search" 
-                    aria-label="Username" 
-                    onChange={handleSearchInputChanges}   
-                    onSubmit={callSearchFunction}               
-                    aria-describedby="basic-addon1" id="movieInput"/>
-                    <input type="button" value="Search" className="btn btn-primary" onClick={callSearchFunction}></input>
-                  {/* </from> */}
+            <div className="input-group mb-3" style={{width:"100%"}}>
+                  <Form inline style={{width:"100%"}} onSubmit={callSearchFunction}>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={handleSearchInputChanges} style={{width:"100%"}}/>
+                </Form>
             </div>
 	    </div>
     );
